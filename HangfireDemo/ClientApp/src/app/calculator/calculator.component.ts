@@ -1,6 +1,4 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { HttpClient } from 'selenium-webdriver/http';
-import { textDef } from '@angular/core/src/view';
 
 @Component({
   selector: 'app-calculator',
@@ -12,7 +10,7 @@ export class CalculatorComponent implements OnInit {
   input1: number;
   input2: number;
 
-  constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {   
+  constructor() {   
   }
 
   ngOnInit() {
