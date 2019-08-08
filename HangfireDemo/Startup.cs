@@ -71,10 +71,8 @@ namespace HangfireDemo
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
 
-            //below 2 lines to use hangfire dashboard
-            app.UseHangfireDashboard();
-            backgroundJobs.Enqueue(() => Console.WriteLine("Hello world from Hangfire!"));
-
+            //below line to use hangfire dashboard
+            app.UseHangfireDashboard("/hangfire");
 
             app.UseMvc(routes =>
             {
