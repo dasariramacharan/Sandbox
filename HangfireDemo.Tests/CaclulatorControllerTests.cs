@@ -16,7 +16,7 @@ namespace Tests
         }
 
         [Test]
-        public void CheckAddLater_SchedulesAdd_WhenCalled()
+        public void TestkAddLater_SchedulesAdd_WhenCalled()
         {
             // Arrange
             var client = new Mock<IBackgroundJobClient>();
@@ -32,6 +32,20 @@ namespace Tests
                                && job.Args[0].ToString() == a.ToString()
                                && job.Args[1].ToString() == b.ToString()),
                 It.IsAny<EnqueuedState>()));
+        }
+
+
+        [Test]
+        public void TestAddNumbers_AddPostiveNumbers_ReturnsSum()
+        {
+            var client = new Mock<IBackgroundJobClient>();
+            var controller = new CalculatorController(client.Object);
+            int a = 1, b = 2;
+
+            // Act
+           var result = controller.AddNumbers(a, b);
+
+            Assert.AreEqual(result, 3);
         }
     }
 
