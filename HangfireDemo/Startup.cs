@@ -8,6 +8,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Hangfire;
 using Hangfire.SqlServer;
 using System;
+using MediatR;
+using System.Reflection;
 
 namespace HangfireDemo
 {
@@ -31,6 +33,23 @@ namespace HangfireDemo
             {
                 configuration.RootPath = "ClientApp/dist";
             });
+
+            RegisterMediatrServices(services);
+        }
+
+        private static void RegisterMediatrServices(IServiceCollection services)
+        {
+            //ref: https://github.com/jbogard/MediatR.Extensions.Microsoft.DependencyInjection
+
+            //Scans assemblies and adds handlers, preprocessors, and postprocessors implementations to the container.
+            //services.AddMediatR(typeof(MyHandler)); OR below line 
+            services.AddMediatR(typeof(Startup).GetTypeInfo().Assembly);
+            
+            //To customize 
+            //services.AddMediatR(cfg => cfg.Using<MyCustomMediator>().AsSingleton(), typeof(Startup));
+
+
+            //Refer: https://github.com/jbogard/MediatR/wiki
         }
 
         private void AddHangfire(IServiceCollection services)
