@@ -7,6 +7,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HangfireDemo", "HangfireDem
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HangfireDemo.Tests", "HangfireDemo.Tests\HangfireDemo.Tests.csproj", "{CE5DAD2E-9959-4FA5-9BBD-234CADCE09DF}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IntegrationTests", "IntegrationTests", "{D1A0A537-A851-4ED9-8C3B-5E362EE35CB3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{28AFE0D1-56C9-4093-82AE-B22FF3EDF8E4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,6 +28,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{CE5DAD2E-9959-4FA5-9BBD-234CADCE09DF} = {28AFE0D1-56C9-4093-82AE-B22FF3EDF8E4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {49555D0D-9E5E-4CF9-88A4-E0E4C3EF9116}
