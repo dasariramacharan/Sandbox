@@ -43,8 +43,8 @@ namespace HangfireDemo
 
             //Scans assemblies and adds handlers, preprocessors, and postprocessors implementations to the container.
             //services.AddMediatR(typeof(MyHandler)); OR below line 
-            services.AddMediatR(typeof(Startup).GetTypeInfo().Assembly);
-            
+            services.AddMediatR(typeof(Startup).GetTypeInfo().Assembly); //or services.AddMediatR(Assembly.GetExecutingAssembly());
+
             //To customize 
             //services.AddMediatR(cfg => cfg.Using<MyCustomMediator>().AsSingleton(), typeof(Startup));
 
