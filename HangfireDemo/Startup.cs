@@ -11,7 +11,7 @@ using System;
 using MediatR;
 using System.Reflection;
 
-namespace HangfireDemo
+namespace Playground.Web
 {
     public class Startup
     {

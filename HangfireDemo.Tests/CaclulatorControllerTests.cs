@@ -1,11 +1,11 @@
 using Hangfire;
 using Hangfire.Common;
 using Hangfire.States;
-using HangfireDemo.Controllers;
+using Playground.Web.Controllers;
 using Moq;
 using NUnit.Framework;
 
-namespace Tests
+namespace Playground.Web.UnitTests
 {
     [TestFixture]
     public class CalculatorControllerTests

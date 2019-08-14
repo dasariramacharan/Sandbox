@@ -6,7 +6,7 @@ using ServiceLayer.Messages;
 using ServiceLayer.UserActivity;
 using System.Threading.Tasks;
 
-namespace HangfireDemo.Controllers
+namespace Playground.Web.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -30,17 +30,20 @@ namespace HangfireDemo.Controllers
 
         public async Task AddFoodItemAsync(FoodItemRequest foodItem)
         {
+            //TODO: Add tests 
             await _mediator.Send(foodItem);
         }
 
         public async Task<UserActivityHistoryResponse> GetUserActivityHistoryAsync()
         {
+            //TODO: Add tests 
             return await _mediator.Send(new UserActivityHistoryRequest { UserId = LoggedInUserId });
         }
 
         //Syncronous call. but internally async anyway
         public bool IsValidUser(LoginCredentials loginCredentials)
         {
+            //TODO: Add tests 
             return _mediator.Send(loginCredentials).Result;
         }
     }

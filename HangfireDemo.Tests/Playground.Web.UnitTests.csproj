@@ -4,6 +4,10 @@
     <TargetFramework>netcoreapp2.2</TargetFramework>
 
     <IsPackable>false</IsPackable>
+
+    <AssemblyName>HangfireDemo.UnitTests</AssemblyName>
+
+    <RootNamespace>HangfireDemo.UnitTests</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -15,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\HangfireDemo\HangfireDemo.csproj" />
+    <ProjectReference Include="..\HangfireDemo\Playground.Web.csproj" />
   </ItemGroup>
 
 </Project>

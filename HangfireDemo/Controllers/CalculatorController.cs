@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Hangfire;
 using Microsoft.AspNetCore.Mvc;
 
-namespace HangfireDemo.Controllers
+namespace Playground.Web.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
