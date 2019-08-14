@@ -1,7 +1,10 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using ServiceLayer.Auth;
 using ServiceLayer.FoodItem;
 using ServiceLayer.Messages;
+using ServiceLayer.UserActivity;
+using System.Threading.Tasks;
 
 namespace HangfireDemo.Controllers
 {
@@ -10,9 +13,11 @@ namespace HangfireDemo.Controllers
     public class FitnessBuddyController : Controller
     {
         private readonly IMediator _mediator;
+        public int LoggedInUserId { get; set; }
         public FitnessBuddyController(IMediator mediator)
         {
             _mediator = mediator;
+            LoggedInUserId = 100;
         }
 
 
@@ -23,9 +28,20 @@ namespace HangfireDemo.Controllers
             _mediator.Publish(foodTaken);
         }
 
-        public bool AddFoodItem(FoodItemRequest foodItem)
+        public async Task AddFoodItemAsync(FoodItemRequest foodItem)
         {
-            return _mediator.Send(foodItem).Result;
+            await _mediator.Send(foodItem);
+        }
+
+        public async Task<UserActivityHistoryResponse> GetUserActivityHistoryAsync()
+        {
+            return await _mediator.Send(new UserActivityHistoryRequest { UserId = LoggedInUserId });
+        }
+
+        //Syncronous call. but internally async anyway
+        public bool IsValidUser(LoginCredentials loginCredentials)
+        {
+            return _mediator.Send(loginCredentials).Result;
         }
     }
 }

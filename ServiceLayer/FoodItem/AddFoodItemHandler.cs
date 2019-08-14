@@ -1,11 +1,13 @@
 ﻿using MediatR;
+using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace ServiceLayer.FoodItem
 {
-    public class FoodItemRequest : IRequest<bool>
+    public class FoodItemRequest : IRequest
     {
         public int FoodItemId { get; set; }
         public string Name { get; set; }
@@ -18,10 +20,11 @@ namespace ServiceLayer.FoodItem
         public string NutrientName { get; set; }//TODO: suggest to be enum
         public int QuantityPerGm { get; set; }
     }
-
-    public class AddFoodItemHandler : IRequestHandler<FoodItemRequest, bool>
+    
+    // your message does not require a response, use the AsyncRequestHandler<TRequest> base class
+    public class AddFoodItemHandler : AsyncRequestHandler<FoodItemRequest>
     {
-        public Task<bool> Handle(FoodItemRequest request, CancellationToken cancellationToken)
+        protected override Task Handle(FoodItemRequest request, CancellationToken cancellationToken)
         {
             //1.Validate 'request' using fluent validation
 
