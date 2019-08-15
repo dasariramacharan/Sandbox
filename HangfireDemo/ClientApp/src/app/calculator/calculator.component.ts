@@ -19,7 +19,7 @@ export class CalculatorComponent implements OnInit {
   }
 
   add() {
-    this.http.get<number>(this.baseUrl + `api/calculator/add?a=${this.input1}&b=${this.input2}`)
+    this.http.get<number>(this.baseUrl + `api/calculator/addnumbers?a=${this.input1}&b=${this.input2}`)
       .subscribe(data => alert(data),
         (err) => console.log(err));
     //TODO: Perform operation at server
