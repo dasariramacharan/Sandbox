@@ -5,7 +5,7 @@ using System.Data.SqlClient;
 using System.Text;
 
 namespace ServiceLayer
-{
+{    //TODO: to add tests to Dapper usage
     public class DapperDemoService
     {
         //I’ve found myself using doing writes using a different ORM (EF or NHibernate), but sticking with Dapper for querying

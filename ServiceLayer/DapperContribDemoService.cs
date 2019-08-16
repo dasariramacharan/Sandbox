@@ -4,7 +4,7 @@ using System.Data.SqlClient;
 
 namespace ServiceLayer
 {
-
+    //TODO: to add tests to Dapper contrib
     //TODO: you may also refer to some of the other Dapper extension libraries such as Dapper.Rainbow or DapperExtensions
 
     public class DapperContribDemoService
