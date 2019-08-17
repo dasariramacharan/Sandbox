@@ -10,6 +10,8 @@ using Hangfire.SqlServer;
 using System;
 using MediatR;
 using System.Reflection;
+using ServiceLayer.Database;
+using Microsoft.EntityFrameworkCore;
 
 namespace Playground.Web
 {
@@ -35,6 +37,9 @@ namespace Playground.Web
             });
 
             RegisterMediatrServices(services);
+
+            //If you want to place the database files elsewhere in your filesystem, add an absolute filepath to the connection string.
+            services.AddDbContext<EventContext>(options => options.UseSqlServer("Data Source=(local);Initial Catalog=DapperExample;Integrated Security=SSPI"));
         }
 
         private static void RegisterMediatrServices(IServiceCollection services)
