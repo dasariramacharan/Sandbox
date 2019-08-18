@@ -12,6 +12,7 @@ using MediatR;
 using System.Reflection;
 using ServiceLayer.Database;
 using Microsoft.EntityFrameworkCore;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace Playground.Web
 {
@@ -40,6 +41,12 @@ namespace Playground.Web
 
             //If you want to place the database files elsewhere in your filesystem, add an absolute filepath to the connection string.
             services.AddDbContext<EventContext>(options => options.UseSqlServer("Data Source=(local);Initial Catalog=DapperExample;Integrated Security=SSPI"));
+
+            // Register the Swagger generator, defining 1 or more Swagger documents
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info { Title = "My Sandbox Playground API", Version = "v1" });
+            });
         }
 
         private static void RegisterMediatrServices(IServiceCollection services)
@@ -98,13 +105,23 @@ namespace Playground.Web
             //below line to use hangfire dashboard
             app.UseHangfireDashboard("/hangfire");
 
-            app.UseMvc(routes =>
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
             {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller}/{action=Index}/{id?}");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My Sandbox Playground API");
             });
 
+            //Conventional routing
+            //app.UseMvc(routes =>
+            //{
+            //    routes.MapRoute(
+            //        name: "default",
+            //        template: "{controller}/{action=Index}/{id?}");
+            //});         
+
+            //Attribute routing
+            app.UseMvc();        
+           
             app.UseSpa(spa =>
             {
                 // To learn more about options for serving an Angular SPA from ASP.NET Core,

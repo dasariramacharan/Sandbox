@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Playground.Web.Controllers
 {
-    [Route("api/[controller]")]
+    [Produces("application/json")]
+    [Route("api/eventsef")]
     [ApiController]
     public class EventsEfController : ControllerBase
     {
@@ -17,6 +18,7 @@ namespace Playground.Web.Controllers
             _eventContext = eventContext;
         }
 
+        [Route("{eventId}")]
         [HttpGet("{eventId}")]
         public async Task<IActionResult> Get(int eventId)
         {
