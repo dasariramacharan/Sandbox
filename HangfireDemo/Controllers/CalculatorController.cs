@@ -18,6 +18,7 @@ namespace Playground.Web.Controllers
             _jobClient = jobClient;
         }
 
+        [HttpGet("[action]")]
         public IActionResult Index()
         {
             return View();

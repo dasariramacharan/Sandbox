@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Playground.Web.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class FitnessBuddyController : Controller
     {
@@ -20,7 +20,7 @@ namespace Playground.Web.Controllers
             LoggedInUserId = 100;
         }
 
-
+        [HttpPost]
         public void AddAMeal(FoodTakenMessage foodTaken)
         {
             //TODO: Add tests for Notificaiton message type
@@ -28,18 +28,21 @@ namespace Playground.Web.Controllers
             _mediator.Publish(foodTaken);
         }
 
+        [HttpPost]
         public async Task AddFoodItemAsync(FoodItemRequest foodItem)
         {
             //TODO: Add tests 
             await _mediator.Send(foodItem);
         }
 
+        [HttpGet("activity")]
         public async Task<UserActivityHistoryResponse> GetUserActivityHistoryAsync()
         {
             //TODO: Add tests 
             return await _mediator.Send(new UserActivityHistoryRequest { UserId = LoggedInUserId });
         }
 
+        [HttpPost]
         //Syncronous call. but internally async anyway
         public bool IsValidUser(LoginCredentials loginCredentials)
         {

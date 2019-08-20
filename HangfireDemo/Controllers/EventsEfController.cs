@@ -18,7 +18,6 @@ namespace Playground.Web.Controllers
             _eventContext = eventContext;
         }
 
-        [Route("{eventId}")]
         [HttpGet("{eventId}")]
         public async Task<IActionResult> Get(int eventId)
         {
