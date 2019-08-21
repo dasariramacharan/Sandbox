@@ -13,6 +13,7 @@ using System.Reflection;
 using ServiceLayer.Database;
 using Microsoft.EntityFrameworkCore;
 using Swashbuckle.AspNetCore.Swagger;
+using Playground.Web.SignalRCode;
 
 namespace Playground.Web
 {
@@ -28,6 +29,16 @@ namespace Playground.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //Adding SignalR ( before MVC) 
+            services.AddCors(o => o.AddPolicy("CorsPolicy", builder => {
+                builder
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .WithOrigins("http://localhost:4200");
+            }));
+            services.AddSignalR();
+
+
             AddHangfire(services);
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
@@ -110,6 +121,14 @@ namespace Playground.Web
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My Sandbox Playground API");
             });
+
+            //Use SignalR ( before MVC)
+            app.UseCors("CorsPolicy");
+            app.UseSignalR(routes =>
+            {
+                routes.MapHub<NotifyHub>("notify");
+            });
+
 
             //Conventional routing
             //app.UseMvc(routes =>
