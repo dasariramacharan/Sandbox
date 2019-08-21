@@ -34,7 +34,7 @@ namespace Playground.Web
                 builder
                 .AllowAnyMethod()
                 .AllowAnyHeader()
-                .WithOrigins("http://localhost:4200");
+                .WithOrigins("http://localhost:44376"); //angular app url with port goes here 
             }));
             services.AddSignalR();
 
@@ -126,7 +126,7 @@ namespace Playground.Web
             app.UseCors("CorsPolicy");
             app.UseSignalR(routes =>
             {
-                routes.MapHub<NotifyHub>("notify");
+                routes.MapHub<NotifyHub>("/notify");
             });
 
 

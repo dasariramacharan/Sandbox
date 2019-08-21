@@ -10,6 +10,7 @@ import { HomeComponent } from './home/home.component';
 import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { CalculatorComponent } from './calculator/calculator.component';
+import { SignalrDemoComponent } from './signalr-demo/signalr-demo.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { CalculatorComponent } from './calculator/calculator.component';
     HomeComponent,
     CounterComponent,
     FetchDataComponent,
-    CalculatorComponent
+    CalculatorComponent,
+    SignalrDemoComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -29,6 +31,7 @@ import { CalculatorComponent } from './calculator/calculator.component';
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
       { path: 'calculator', component: CalculatorComponent },
+      { path: 'signalrdemo', component: SignalrDemoComponent },
     ])
   ],
   providers: [],

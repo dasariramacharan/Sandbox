@@ -32,6 +32,11 @@
                 <span class='glyphicon glyphicon-th-list'></span> Calculator
               </a>
             </li>
+            <li [routerLinkActive]='["link-active"]'>
+              <a [routerLink]='["/signalrdemo"]' (click)='collapse()'>
+                <span class='glyphicon glyphicon-signal'></span> SignalR Demo
+              </a>
+            </li>
           </ul>
         </div>
     </div>
