@@ -4,7 +4,7 @@
 SignalR Messages go below 
  
 <ul>
-  <li ng-repeat="item in msgs">
+  <li *ngFor="let item of msgs">
     {{$index}}. {{item?.severity}}  - {{item?.summary}}
   </li>
 </ul>

@@ -15,7 +15,7 @@ export class SignalrDemoComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this._hubConnection = new HubConnectionBuilder().withUrl('http://localhost:44376/notify').build();
+    this._hubConnection = new HubConnectionBuilder().withUrl('/notify').build();
     this._hubConnection
       .start()
       .then(() => console.log('Connection started!'))

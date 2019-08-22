@@ -34,7 +34,7 @@ namespace Playground.Web
                 builder
                 .AllowAnyMethod()
                 .AllowAnyHeader()
-                .WithOrigins("http://localhost:44376"); //angular app url with port goes here 
+                .WithOrigins("http://localhost:4200"); 
             }));
             services.AddSignalR();
 
