@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Hangfire;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
+using Playground.Web.SignalRCode;
 
 namespace Playground.Web.Controllers
 {
@@ -12,10 +15,12 @@ namespace Playground.Web.Controllers
     public class CalculatorController : Controller
     {
         private IBackgroundJobClient _jobClient;
+        private IHubContext<NotifyHub, ITypedHubClient> _hubContext;
 
-        public CalculatorController(IBackgroundJobClient jobClient)
+        public CalculatorController(IBackgroundJobClient jobClient, IHubContext<NotifyHub, ITypedHubClient> hubContext)
         {
             _jobClient = jobClient;
+            _hubContext = hubContext;
         }
 
         [HttpGet("[action]")]
@@ -30,10 +35,25 @@ namespace Playground.Web.Controllers
             return a + b;
         }
 
-        [HttpGet("[action]")]
-        public void AddLater(int a, int b)
+        [HttpPost("[action]")]
+        public void AddLater(AddNumbersRequest request)
         {
-            _jobClient.Enqueue(() => AddNumbers(a, b));
+            //using Signalr
+            _jobClient.Enqueue(() => AddNumberAndNotify(request));
         }
+
+        private void AddNumberAndNotify(AddNumbersRequest request)
+        {
+            Thread.Sleep(3000);
+            var result = request.a + request.b;
+
+            _hubContext.Clients.All.BroadcastMessage($"Result of add notify of {request.a} and {request.b}", result.ToString());
+        }
+    }
+
+    public class AddNumbersRequest
+    {
+        public int a { get; set; }
+        public int b { get; set; }
     }
 }
