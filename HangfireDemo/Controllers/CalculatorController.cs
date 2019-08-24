@@ -42,7 +42,7 @@ namespace Playground.Web.Controllers
             _jobClient.Enqueue(() => AddNumberAndNotify(request));
         }
 
-        private void AddNumberAndNotify(AddNumbersRequest request)
+        public void AddNumberAndNotify(AddNumbersRequest request)
         {
             Thread.Sleep(3000);
             var result = request.a + request.b;

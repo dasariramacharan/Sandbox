@@ -43,7 +43,8 @@ export class CalculatorComponent implements OnInit {
   }
 
   addLater() {
-    this.http.post(this.baseUrl + `api/calculator/addnumbers`, { a: this.input1, b: this.input2 })
+    var request = { a: this.input1, b: this.input2 };
+    this.http.post(this.baseUrl + `api/calculator/addlater`,request )
       .subscribe(data => console.log('data from add later' + data), //should get nothing anyway!!
         (err) => console.log(err));   
   }
