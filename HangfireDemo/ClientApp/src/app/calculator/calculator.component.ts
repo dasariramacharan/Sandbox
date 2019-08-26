@@ -25,10 +25,12 @@ export class CalculatorComponent implements OnInit {
     this._hubConnection
       .start()
       .then(() => console.log('Connection started! waiting for result...'))
-      .catch(err => console.log('Error while establishing connection :('));
+      .catch(err => this.toastr.error('Error while establishing connection :');
 
       this._hubConnection.on('BroadcastMessage', (type: string, payload: string) => {
-        this.toastr.success("Result of recent add Later is  " + payload.toString() );
+        this.toastr.success("Result of recent add Later is  " + payload.toString(),'Add Later,' {
+          positionClass: 'toast-bottom-right' 
+       } );
         console.log(type);
       });
   }

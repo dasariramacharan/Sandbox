@@ -28,7 +28,9 @@ import { SignalrDemoComponent } from './signalr-demo/signalr-demo.component';
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
-    BrowserAnimationsModule,ToastrModule.forRoot(),
+    BrowserAnimationsModule,ToastrModule.forRoot( {
+      positionClass: 'toast-bottom-center' 
+   }),
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'counter', component: CounterComponent },
