@@ -21,25 +21,24 @@ export class CalculatorComponent implements OnInit {
   }
 
   ngOnInit() {
+    this._hubConnection = new HubConnectionBuilder().withUrl('/notify').build();
+    this._hubConnection
+      .start()
+      .then(() => console.log('Connection started! waiting for result...'))
+      .catch(err => console.log('Error while establishing connection :('));
+
+      this._hubConnection.on('BroadcastMessage', (type: string, payload: string) => {
+        this.toastr.success("Result of recent add Later is  " + payload.toString() );
+        console.log(type);
+      });
   }
 
   add() {
     this.http.get<number>(this.baseUrl + `api/calculator/addnumbers?a=${this.input1}&b=${this.input2}`)
       .subscribe(data =>{
-        this._hubConnection = new HubConnectionBuilder().withUrl('/notify').build();
-        this._hubConnection
-          .start()
-          .then(() => console.log('Connection started! waiting for result...'))
-          .catch(err => console.log('Error while establishing connection :('));
-
-          this._hubConnection.on('BroadcastMessage', (type: string, payload: string) => {
-            this.toastr.success("Result of recent add Later is  " + payload );
-            console.log(type);
-          });
+        this.toastr.success("Result of recent add  is  " + data.toString() );
       }, 
         (err) => this.toastr.error('Error',err));
-    //TODO: Perform operation at server
-    //alert(this.input1 + this.input2);
   }
 
   addLater() {
