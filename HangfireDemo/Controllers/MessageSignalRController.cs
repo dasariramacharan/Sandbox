@@ -23,7 +23,7 @@ namespace Playground.Web.Controllers
         [HttpPost]
         public string Post([FromBody]Message msg)
         {
-            string retMessage = string.Empty;
+            string retMessage;
             try
             {
                 _hubContext.Clients.All.BroadcastMessage(msg.Type, msg.Payload);

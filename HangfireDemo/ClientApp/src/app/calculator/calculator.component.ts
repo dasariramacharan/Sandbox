@@ -25,13 +25,12 @@ export class CalculatorComponent implements OnInit {
     this._hubConnection
       .start()
       .then(() => console.log('Connection started! waiting for result...'))
-      .catch(err => this.toastr.error('Error while establishing connection :');
+      .catch(err => this.toastr.error('Error while establishing connection :'));
 
-      this._hubConnection.on('BroadcastMessage', (type: string, payload: string) => {
-        this.toastr.success("Result of recent add Later is  " + payload.toString(),'Add Later,' {
+      this._hubConnection.on('ReceiveAddLaterResult', (result : number) => {
+        this.toastr.success("Result of recent add Later is  " + result.toString(),'Add Later', {
           positionClass: 'toast-bottom-right' 
        } );
-        console.log(type);
       });
   }
 
@@ -46,7 +45,10 @@ export class CalculatorComponent implements OnInit {
   addLater() {
     var request = { a: this.input1, b: this.input2 };
     this.http.post(this.baseUrl + `api/calculator/addlater`,request )
-      .subscribe(data => console.log('data from add later' + data), //should get nothing anyway!!
+      .subscribe(data =>{
+        this._hubConnection.invoke('RequestAddLaterResult',request);
+        console.log('data from add later' + data); //should get nothing anyway!!
+      },
         (err) => console.log(err));   
   }
 

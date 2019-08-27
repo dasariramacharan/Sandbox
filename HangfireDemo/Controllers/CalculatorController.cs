@@ -38,17 +38,20 @@ namespace Playground.Web.Controllers
         [HttpPost("[action]")]
         public void AddLater(AddNumbersRequest request)
         {
-            //using Signalr
-            _jobClient.Enqueue(() => AddNumberAndNotify(request));
+            //result sent when asked using Signalr - Hub.RequestAddLaterResult
+            return;
+
+            //below code for hangfire
+            //_jobClient.Enqueue(() => AddNumberAndNotify(request));
         }
 
-        public void AddNumberAndNotify(AddNumbersRequest request)
-        {
-            Thread.Sleep(3000);
-            var result = request.a + request.b;
+        //public void AddNumberAndNotify(AddNumbersRequest request)
+        //{
+        //    //Thread.Sleep(3000);
+        //    var result = request.a + request.b;
 
-            _hubContext.Clients.All.BroadcastMessage($"Result of add notify of {request.a} and {request.b}", result.ToString());
-        }
+        //    //_hubContext.Clients.All.BroadcastMessage($"Result of add notify of {request.a} and {request.b}", result.ToString());
+        //}
     }
 
     public class AddNumbersRequest
