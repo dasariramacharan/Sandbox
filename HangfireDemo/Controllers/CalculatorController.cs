@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Hangfire;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
+using Playground.Web.Services;
 using Playground.Web.SignalRCode;
 
 namespace Playground.Web.Controllers
@@ -39,10 +40,10 @@ namespace Playground.Web.Controllers
         public void AddLater(AddNumbersRequest request)
         {
             //result sent when asked using Signalr - Hub.RequestAddLaterResult
-            return;
+          //  return;
 
             //below code for hangfire
-            //_jobClient.Enqueue(() => AddNumberAndNotify(request));
+            _jobClient.Enqueue(() => new CalculatorService().Add(request));
         }
 
         //public void AddNumberAndNotify(AddNumbersRequest request)

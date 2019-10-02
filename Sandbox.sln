@@ -15,7 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceLayer", "ServiceLaye
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceLayer.UnitTests", "ServiceLayer.UnitTests\ServiceLayer.UnitTests.csproj", "{D17963B5-1F09-4376-A4A3-5F25EA653B3A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPI", "WebApplication1\WebAPI.csproj", "{4A41FEAC-BB77-4716-8016-C41262D3B12A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebAPI", "WebApplication1\WebAPI.csproj", "{4A41FEAC-BB77-4716-8016-C41262D3B12A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HangfireApp", "HangfireApp\HangfireApp.csproj", "{3EEA53C8-0049-44D6-B636-BB94239B347D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,6 +45,10 @@ Global
 		{4A41FEAC-BB77-4716-8016-C41262D3B12A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4A41FEAC-BB77-4716-8016-C41262D3B12A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4A41FEAC-BB77-4716-8016-C41262D3B12A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3EEA53C8-0049-44D6-B636-BB94239B347D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3EEA53C8-0049-44D6-B636-BB94239B347D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3EEA53C8-0049-44D6-B636-BB94239B347D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3EEA53C8-0049-44D6-B636-BB94239B347D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
