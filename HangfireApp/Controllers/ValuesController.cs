@@ -23,15 +23,16 @@ namespace HangfireApp.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get(int a, int b)
         {
-            _jobClient.Enqueue(() => new CalculatorService().Add(new CalculatorService.AddRequest { a = a, b = b }));
-            return new string[] { "value1", "value2" };
+            _jobClient.Enqueue(() => new CalculatorService().AddDoNotIgnoreParams(new CalculatorService.AddRequest { a = a, b = b }));
+            return new string[] { a.ToString(), b.ToString() };
         }
 
         // GET api/values/5
         [HttpGet("{id}")]
         public ActionResult<string> Get(int id)
         {
-            return "value";
+            _jobClient.Enqueue(() => new CalculatorService().AddIgnoreParams(new CalculatorService.AddRequest { a = id, b = id + 1 }));
+            return (id + id + 1).ToString();
         }
 
         [HttpGet]
@@ -39,7 +40,7 @@ namespace HangfireApp.Controllers
         {
             var every10SecCronEx = "0/59 * * * * *";
             RecurringJob.AddOrUpdate<CalculatorService>("Add",
-              mdus => mdus.Add( new CalculatorService.AddRequest { a = 300, b = 400 }), every10SecCronEx);
+              mdus => mdus.AddDoNotIgnoreParams(new CalculatorService.AddRequest { a = 300, b = 400 }), every10SecCronEx);
             return "schedule created";
         }
 
