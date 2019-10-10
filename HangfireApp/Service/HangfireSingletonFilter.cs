@@ -2,7 +2,6 @@
 using Hangfire.Common;
 using Hangfire.States;
 using Newtonsoft.Json;
-using System;
 using System.Linq;
 
 namespace HangfireApp.Service
@@ -33,7 +32,7 @@ namespace HangfireApp.Service
                 CancelJobIfAlreadyInQueue(context, methodName, VarybyArgs);
         }
 
-        private static void CancelJobIfAlreadyInQueue(CreatingContext context, string methodName, bool ignoreArgss)
+        private static void CancelJobIfAlreadyInQueue(CreatingContext context, string methodName, bool varyByArgs)
         {
             var queueName = ((EnqueuedState)context.InitialState).Queue;
             var api = context.Storage.GetMonitoringApi();
@@ -43,14 +42,14 @@ namespace HangfireApp.Service
 
             if (jobs.Any(j =>
             {
-                var jv = j.Value; return jv.Job.Method.Name == methodName && jv.InEnqueuedState && (ignoreArgss || GetArgssHash(jv.Job) == currentJobHash);
+                var jv = j.Value; return jv.Job.Method.Name == methodName && jv.InEnqueuedState && (!varyByArgs || GetArgssHash(jv.Job) == currentJobHash);
             }))
             {
                 context.Canceled = true;
             }
         }
 
-        private static void CancelJobIfAlreadyInProcessingState(CreatingContext context, string methodName, bool ignoreArgss)
+        private static void CancelJobIfAlreadyInProcessingState(CreatingContext context, string methodName, bool varyByArgs)
         {
             var api = context.Storage.GetMonitoringApi();
             var count = api.ProcessingCount();
@@ -59,7 +58,7 @@ namespace HangfireApp.Service
 
             if (jobs.Any(j =>
             {
-                var jv = j.Value; return jv.Job.Method.Name == methodName && jv.InProcessingState && (ignoreArgss || GetArgssHash(jv.Job) == currentJobHash);
+                var jv = j.Value; return jv.Job.Method.Name == methodName && jv.InProcessingState && (!varyByArgs || GetArgssHash(jv.Job) == currentJobHash);
             }))
             {
                 context.Canceled = true;
