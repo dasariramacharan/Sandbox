@@ -34,6 +34,8 @@ namespace HangfireApp.Service
 
         private static void CancelJobIfAlreadyInQueue(CreatingContext context, string methodName, bool varyByArgs)
         {
+            if (context.InitialState == null) return;
+
             var queueName = ((EnqueuedState)context.InitialState).Queue;
             var api = context.Storage.GetMonitoringApi();
             var count = api.EnqueuedCount(queueName);
